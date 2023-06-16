@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:57:39 by asimonin          #+#    #+#             */
-/*   Updated: 2023/06/10 19:59:25 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/06/14 19:07:30 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	ft_atoi(const char *str)
 	}
 	result *= sign;
 	if (str[i] != '\0' || result < -2147483648 || result > 2147483647)
-		return (0);
+		return (-1);
 	return ((int)result);
 }

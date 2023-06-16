@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/06/13 18:45:25 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/06/14 22:09:06 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,19 @@ typedef struct s_data
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				nbr_of_meal;
-	int	index;
+	int				total_of_meal;
+	t_philo			*philo;
 }	t_data;
+
+typedef struct s_philo
+{
+	int				index;
+	int				nbr_of_meal;
+	int				death;
+	pthread_mutex_t	l_fork;
+	pthread_mutex_t	r_fork;
+	t_data			*data;
+}	t_philo;
 
 // sources //
 
