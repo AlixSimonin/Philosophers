@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/06/14 22:09:06 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:39:47 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 
 typedef struct s_philo
 {
+	struct timeval	time;
 	int				index;
 	int				nbr_of_meal;
 	int				death;
