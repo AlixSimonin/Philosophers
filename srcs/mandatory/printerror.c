@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/06/14 16:33:31 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/14 22:38:37 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ void	print_error(t_data *var, int nbr)
 		printf("Failed to create thread\n");
 	else if (nbr == 3)
 		printf("Failed to join thread\n");
+	else if (nbr == 4)
+		printf("Mutex failed\n");
 	free_all(var, 1);
 }

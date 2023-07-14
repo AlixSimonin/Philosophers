@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:03:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/06/14 16:30:46 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/15 00:43:53 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_all(t_data *var, int nbr)
 {
-	if (var -> threads)
-		free(var->threads);
+	if (var->philo)
+		free(var->philo);
 	if (nbr == 1)
 		exit (1);
 }

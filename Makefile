@@ -6,7 +6,7 @@ DIR_SRCS		=	srcs/mandatory
 
 DIR_OBJS		=	objs
 
-SRCS_NAMES		=	main.c	printerror.c	init.c	free_all.c	time.c
+SRCS_NAMES		=	main.c	printerror.c	init.c	free_all.c	time.c	process.c
 
 SRCS_NAMES_B	=	
 
