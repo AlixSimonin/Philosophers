@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:51:36 by asimonin          #+#    #+#             */
-/*   Updated: 2023/06/16 23:55:41 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:15:09 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,17 @@ int	main(int ac, char **av)
 {
 	t_data	var;
 	int		i;
+	int		z = 0;
+	int		w = 0;
 
 	i = -1;
+	z = gettime();
+	sleep(3);
+	w = gettime() - z;
+	printf("[%06D]\n", w);
 	memset(&var, 0, sizeof(t_data));
 	init(&var, ac, av);
-	printf("yolo %i\n", gettimeofday(&phil.time, NULL));
+	
 	var.threads = malloc(var.nbr_philo * sizeof(pthread_t));
 	if (!var.threads)
 		return (1);
