@@ -6,17 +6,19 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:51:36 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/13 18:15:09 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:06:57 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*yolo()
+void	*yolo(void *var)
 {
 	void *o = NULL;
-
-	printf("On mange ici\n");
+	t_data *tmp = (t_data *)var;
+	sleep(1);
+	int	r =  gettime() - tmp->start_time;
+	printf("On mange ici %i\n", r);
 	return ((void *)o);
 }
 
@@ -24,24 +26,18 @@ int	main(int ac, char **av)
 {
 	t_data	var;
 	int		i;
-	int		z = 0;
-	int		w = 0;
 
 	i = -1;
-	z = gettime();
-	sleep(3);
-	w = gettime() - z;
-	printf("[%06D]\n", w);
 	memset(&var, 0, sizeof(t_data));
 	init(&var, ac, av);
-	
+	var.start_time = gettime();
 	var.threads = malloc(var.nbr_philo * sizeof(pthread_t));
 	if (!var.threads)
 		return (1);
 	pthread_mutex_init(&var.mutex, NULL);
 	while (++i < var.nbr_philo)
 	{
-		if (pthread_create(&var.threads[i], NULL, &yolo, NULL) != 0)
+		if (pthread_create(&var.threads[i], NULL, &yolo, (&var)) != 0)
 			print_error(&var, 2);
 		printf("Thread %d has started\n", i);
 	}
