@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/16 00:02:55 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:35:59 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,23 @@ void	init(t_data *var, int ac, char **av)
 
 int	init_philo(t_data *var)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	var->start_time = gettime();
-	var->philo = malloc(var->nbr_philo *sizeof(t_philo));
+	var->philo = malloc(var->nbr_philo * sizeof(t_philo));
 	if (!var->philo)
 		return (1);
 	while (++i < var->nbr_philo)
 	{
 		var->philo[i].index = i + 1;
 		var->philo[i].nbr_of_meal = 0;
-		var->philo[i].last_meal = 0;
+		var->philo[i].last_meal = 200;
 		var->philo[i].data = var;
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
 		var->philo[i].r_fork = var->philo[i + 1].l_fork;
-		if (pthread_create(&var->philo[i].thread, NULL, &routine, (&var->philo[i])) != 0)
+		if (pthread_create(&var->philo[i].thread, NULL,
+				&routine, (&var->philo[i])) != 0)
 			print_error(var, 2);
 	}
 	i = -1;

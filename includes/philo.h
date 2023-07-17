@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/15 23:13:21 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:26:13 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ typedef struct s_data
 	int				total_of_meal;
 	int				ded;
 	long			start_time;
-	t_philo	*philo;
+	t_philo			*philo;
 }	t_data;
-
-
 
 // sources //
 
@@ -59,5 +57,6 @@ void	*routine(void *philo);
 int		init_mutex(t_data *var);
 int		init_philo(t_data *var);
 
-long    gettime(void);
+long	gettime(void);
+
 #endif
