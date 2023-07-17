@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/15 01:35:20 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:13:21 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	r_fork;
-	
+	struct s_data	*data;
 }	t_philo;
 
 typedef struct s_data
