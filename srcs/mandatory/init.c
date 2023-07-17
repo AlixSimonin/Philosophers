@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/17 19:35:59 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/17 21:46:03 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ int	init_philo(t_data *var)
 		var->philo[i].last_meal = 200;
 		var->philo[i].data = var;
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
-		var->philo[i].r_fork = var->philo[i + 1].l_fork;
+		// var->philo[i].r_fork = var->philo[i + 1].l_fork;
 		if (pthread_create(&var->philo[i].thread, NULL,
 				&routine, (&var->philo[i])) != 0)
 			print_error(var, 2);
 	}
+	if (check_ded(philo))
 	i = -1;
 	while (++i < var->nbr_philo)
 		if (pthread_join(var->philo[i].thread, NULL) != 0)

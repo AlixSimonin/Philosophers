@@ -32,7 +32,7 @@ all				:	${NAME}
 $(NAME): $(OBJS)
 	@make -C libft
 	@$(CC) $(CFLAGS) $(OBJS) ${LIBFT} ${HEAD} -o $(NAME)
-	@echo "\033[5;1m\033[38;5;117m		philo		\033[0m"
+	# @echo "\033[5;1m\033[38;5;117m		philo		\033[0m"
 
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c | $(DIR_OBJS)

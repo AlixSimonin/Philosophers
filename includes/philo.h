@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/17 18:26:13 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/17 21:46:34 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	*routine(void *philo);
 
 int		init_mutex(t_data *var);
 int		init_philo(t_data *var);
+int		check_ded(t_philo *philo);
 
 long	gettime(void);
 
