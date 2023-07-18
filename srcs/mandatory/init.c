@@ -6,11 +6,21 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/17 21:46:03 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:28:54 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	join_thread(t_data *var)
+{
+	int	i;
+
+	i = -1;
+	while (++i < var->nbr_philo)
+		if (pthread_join(var->philo[i].thread, NULL) != 0)
+			print_error(var, 3);
+}
 
 int	init_mutex(t_data *var)
 {
@@ -58,7 +68,7 @@ int	init_philo(t_data *var)
 	{
 		var->philo[i].index = i + 1;
 		var->philo[i].nbr_of_meal = 0;
-		var->philo[i].last_meal = 200;
+		var->philo[i].last_meal = 0;
 		var->philo[i].data = var;
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
 		// var->philo[i].r_fork = var->philo[i + 1].l_fork;
@@ -66,10 +76,7 @@ int	init_philo(t_data *var)
 				&routine, (&var->philo[i])) != 0)
 			print_error(var, 2);
 	}
-	if (check_ded(philo))
-	i = -1;
-	while (++i < var->nbr_philo)
-		if (pthread_join(var->philo[i].thread, NULL) != 0)
-			print_error(var, 3);
+	death(var->philo);
+	join_thread(var);
 	return (0);
 }

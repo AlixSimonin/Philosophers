@@ -6,11 +6,16 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:07:58 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/17 21:43:53 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:02:10 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	meal(t_philo *philo)
+{
+	
+}
 
 int	check_ded(t_philo *philo)
 {
@@ -26,12 +31,21 @@ int	check_ded(t_philo *philo)
 
 void	death(t_philo *philo)
 {
+	long	m;
 	long	t;
 
-	t = gettime() - philo->last_meal;
-	if (t > philo->data->time_to_eat)
+	while (1)
 	{
-		philo->data->ded = 1;
+		t = gettime() - philo->data->start_time;
+		m = t - philo->last_meal;
+		if (m > philo->data->time_to_die)
+		{
+			pthread_mutex_lock(&(philo)->data->print_mutex);
+			printf("[%06li] %i died\n", t, philo->index);
+			pthread_mutex_unlock(&(philo)->data->print_mutex);
+			philo->data->ded = 1;
+			return ;
+		}
 	}
 }
 
@@ -41,14 +55,11 @@ void	*routine(void *philo)
 	long	r;
 
 	tmp = (t_philo *)philo;
-	death(tmp);
 	r = gettime() - tmp->data->start_time;
-	while (check_ded(tmp))
+	while (!check_ded(tmp))
 	{
-		printf("[%06li] Philosoper %i is ded \n", r, tmp->index);
-		return (NULL);
+		print_status(philo, "is eating");
+		usleep(400);
 	}
-	// else
-		// printf("[%06li] Philosoper %i is eating FOOD \n", r, tmp->index);
 	return (NULL);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printerror.c                                       :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/14 22:38:37 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:55:44 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,16 @@ void	print_error(t_data *var, int nbr)
 	else if (nbr == 4)
 		printf("Mutex failed\n");
 	free_all(var, 1);
+}
+
+void	print_status(t_philo *philo, char *str)
+{
+	long	t;
+
+	if (check_ded(philo))
+		return ;
+	t = gettime() - philo->data->start_time;
+	pthread_mutex_lock(&(philo)->data->print_mutex);
+	printf("[%06li] %i %s\n", t, philo->index, str);
+	pthread_mutex_unlock(&(philo)->data->print_mutex);
 }

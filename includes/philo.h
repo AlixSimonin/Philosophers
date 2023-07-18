@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/17 21:46:34 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:55:50 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_data
 void	print_error(t_data *var, int nbr);
 void	free_all(t_data *var, int nbr);
 void	init(t_data *var, int ac, char **av);
+void	death(t_philo *philo);
+void	join_thread(t_data *var);
+void	print_status(t_philo *philo, char *str);
+
 void	*routine(void *philo);
 
 int		init_mutex(t_data *var);
