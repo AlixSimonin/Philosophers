@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/18 16:28:54 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:16:12 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	init_philo(t_data *var)
 				&routine, (&var->philo[i])) != 0)
 			print_error(var, 2);
 	}
+	printf("%i\n", var->philo->index);
 	death(var->philo);
 	join_thread(var);
 	return (0);
