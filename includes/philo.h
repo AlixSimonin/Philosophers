@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/18 16:55:50 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/19 01:16:48 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	long			last_meal;
 	pthread_t		thread;
 	pthread_mutex_t	l_fork;
-	pthread_mutex_t	r_fork;
+	pthread_mutex_t	*r_fork;
 	struct s_data	*data;
 }	t_philo;
 
@@ -55,8 +55,9 @@ void	init(t_data *var, int ac, char **av);
 void	death(t_philo *philo);
 void	join_thread(t_data *var);
 void	print_status(t_philo *philo, char *str);
+void	ft_usleep(int time);
 
-void	*routine(void *philo);
+void	*process(void *philo);
 
 int		init_mutex(t_data *var);
 int		init_philo(t_data *var);

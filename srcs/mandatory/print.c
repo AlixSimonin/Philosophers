@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/18 16:55:44 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:53:22 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	print_status(t_philo *philo, char *str)
 {
 	long	t;
 
-	if (check_ded(philo))
-		return ;
+	// if (check_ded(philo))
+	// 	return ;
 	t = gettime() - philo->data->start_time;
 	pthread_mutex_lock(&(philo)->data->print_mutex);
 	printf("[%06li] %i %s\n", t, philo->index, str);
