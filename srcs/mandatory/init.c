@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/19 01:35:39 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:29:36 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init(t_data *var, int ac, char **av)
 	var->time_to_die = ft_atoi(av[2]);
 	var->time_to_eat = ft_atoi(av[3]);
 	var->time_to_sleep = ft_atoi(av[4]);
-	var->total_of_meal = 0;
+	var->total_of_meal = -1;
 	if (ac == 6)
 	{
 		var->total_of_meal = ft_atoi(av[5]);

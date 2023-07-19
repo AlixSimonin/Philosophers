@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/19 01:16:48 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:36:05 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ typedef struct s_data
 {
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	ded_mutex;
+	pthread_mutex_t	lock;
 	int				nbr_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				total_of_meal;
-	int				ded;
+	int				stap;
 	long			start_time;
 	t_philo			*philo;
 }	t_data;
@@ -56,12 +57,13 @@ void	death(t_philo *philo);
 void	join_thread(t_data *var);
 void	print_status(t_philo *philo, char *str);
 void	ft_usleep(int time);
+void	meal(t_philo *philo);
 
 void	*process(void *philo);
 
 int		init_mutex(t_data *var);
 int		init_philo(t_data *var);
-int		check_ded(t_philo *philo);
+int		check_ded(t_philo *philo, int still_alive);
 
 long	gettime(void);
 
