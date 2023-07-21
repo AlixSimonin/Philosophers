@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/19 17:41:39 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:27:14 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	print_status(t_philo *philo, char *str)
 		return ;
 	t = gettime() - philo->data->start_time;
 	pthread_mutex_lock(&(philo)->data->print_mutex);
-	printf("[%06li] %i %s\n", t, philo->index, str);
+	printf("[%li] %i %s\n", t, philo->index, str);
 	pthread_mutex_unlock(&(philo)->data->print_mutex);
 }

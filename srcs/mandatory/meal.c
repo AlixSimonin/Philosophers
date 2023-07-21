@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:34:55 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/19 16:36:12 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:39:02 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	drop_fork(t_philo *philo)
 {
 	pthread_mutex_unlock(&(philo)->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	print_status(philo, "is sleeping");
-	ft_usleep(philo->data->time_to_sleep);
+	if (!check_ded(philo, 0))
+	{
+		print_status(philo, "is sleeping");
+		ft_usleep(philo->data->time_to_sleep);
+	}
 }
 
 void	meal(t_philo *philo)
