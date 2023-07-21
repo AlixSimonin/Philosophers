@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/20 23:37:30 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:50:31 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,10 @@ int	init_philo(t_data *var)
 	var->philo = malloc(var->nbr_philo * sizeof(t_philo));
 	if (!var->philo)
 		return (1);
+	memset(var->philo, 0, sizeof(t_philo));
 	while (++i < var->nbr_philo)
 	{
 		var->philo[i].index = i + 1;
-		var->philo[i].nbr_of_meal = 0;
-		var->philo[i].last_meal = 0;
 		var->philo[i].data = var;
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
 		if (i == var->nbr_philo - 1)
