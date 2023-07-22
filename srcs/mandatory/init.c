@@ -6,13 +6,13 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/22 13:15:19 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:10:11 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	join_thread(t_data *var)
+void	join_thread(t_data *var, t_stalking *sang_woo)
 {
 	int	i;
 
@@ -20,6 +20,8 @@ void	join_thread(t_data *var)
 	while (++i < var->nbr_philo)
 		if (pthread_join(var->philo[i].thread, NULL) != 0)
 			print_error(var, 3);
+	if (pthread_join(sang_woo->killing, NULL) != 0)
+		print_error(var, 3);
 }
 
 int	init_mutex(t_data *var)
@@ -55,10 +57,12 @@ void	init_struct(t_data *var)
 	if (!var->philo)
 		print_error(var, 5);
 	memset(var->philo, 0, sizeof(t_philo) * var->nbr_philo);
+	var->start_time = gettime();
 	while (++i < var->nbr_philo)
 	{
 		var->philo[i].index = i + 1;
 		var->philo[i].data = var;
+		var->philo[i].last_meal = var->start_time;
 	}
 }
 
@@ -75,7 +79,8 @@ void	init(t_data *var, int ac, char **av)
 	var->total_of_meal = 2147483647;
 	if (ac == 6)
 	{
-		var->total_of_meal = ft_atoi(av[5]) * var->nbr_philo;
+		var->total_of_meal = ft_atoi(av[5]);
+		var->total_of_meal *= var->nbr_philo;
 		if (var->total_of_meal <= 0)
 			print_error(var, 1);
 	}
@@ -87,19 +92,17 @@ void	init(t_data *var, int ac, char **av)
 
 int	init_philo(t_data *var, t_philo *philo)
 {
-	int	i;
+	int			i;
 	t_stalking	sang_woo;
 
-	var->start_time = gettime();
 	i = -1;
 	memset(&sang_woo, 0, sizeof(t_stalking));
 	sang_woo.data = var;
 	sang_woo.philo = philo;
-	// pthread_create(&sang_woo.killing, NULL, &big_bro, &sang_woo);
+	if (pthread_create(&sang_woo.killing, NULL, &big_bro, &sang_woo))
+		print_error(var, 2);
 	while (++i < var->nbr_philo)
 	{
-		if (gettimeofday(&var->philo[i].kill_me, NULL) == -1)
-			return(1);
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
 		if (i == var->nbr_philo - 1)
 			var->philo[i].r_fork = &var->philo[0].l_fork;
@@ -109,6 +112,6 @@ int	init_philo(t_data *var, t_philo *philo)
 				&process, (&var->philo[i])) != 0)
 			print_error(var, 2);
 	}
-	join_thread(var);
+	join_thread(var, &sang_woo);
 	return (0);
 }

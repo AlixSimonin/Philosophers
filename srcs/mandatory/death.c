@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 20:49:26 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/22 13:06:59 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:22:16 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,28 @@ void	*good_bye_mf(t_data	*var, int i)
 void	*big_bro(void *is_watching)
 {
 	t_stalking	*you;
-	long	time;
-	int		i;
+	int			i;
 
 	you = (t_stalking *)is_watching;
 	while (1)
 	{
 		i = -1;
-		while (i++ < you->data->nbr_philo)
+		while (++i < you->data->nbr_philo)
 		{
 			pthread_mutex_lock(&you->data->lock);
-			time = gettime() - convert(you->data->philo[i].kill_me);
+			you->time = gettime() - you->philo->last_meal;
 			pthread_mutex_unlock(&you->data->lock);
-			if (time > you->data->time_to_die)
+			if (you->time > you->data->time_to_die)
 			{
 				pthread_mutex_lock(&(you)->data->ded_mutex);
 				you->data->stap = 1;
 				pthread_mutex_unlock(&(you)->data->ded_mutex);
-				return(good_bye_mf(you->data, i));
+				return (good_bye_mf(you->data, i + 1));
 			}
 			if (check_meal(you))
 				return (NULL);
 		}
+		usleep(50);
 	}
 	return (NULL);
 }
