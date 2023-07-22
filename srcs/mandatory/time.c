@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:12:27 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/19 17:08:12 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:07:24 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	ft_usleep(int time)
 		usleep (time / 10);
 }
 
+long	convert(struct timeval var)
+{
+	return (var.tv_sec * 1000 + var.tv_usec / 1000);
+}
+
 long	gettime(void)
 {
 	struct timeval	tv;
@@ -28,3 +33,4 @@ long	gettime(void)
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
+

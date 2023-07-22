@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/21 15:45:09 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/22 01:52:27 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	print_error(t_data *var, int nbr)
 		printf("Failed to join thread\n");
 	else if (nbr == 4)
 		printf("Mutex failed\n");
+	else if (nbr == 5)
+		printf("Malloc failed\n");
 	free_all(var, 1);
 }
 

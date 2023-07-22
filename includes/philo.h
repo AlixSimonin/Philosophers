@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/21 17:46:56 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:08:20 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_philo
 {
 	int				index;
 	int				nbr_of_meal;
-	long			last_meal;
+	struct timeval	kill_me;
 	pthread_t		thread;
 	int				left;
 	int				right;
@@ -40,6 +40,7 @@ typedef struct s_data
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	ded_mutex;
 	pthread_mutex_t	lock;
+	pthread_mutex_t	wanna_die;
 	int				nbr_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -50,12 +51,12 @@ typedef struct s_data
 	t_philo			*philo;
 }	t_data;
 
-typedef struct s_stalk
+typedef struct s_stalking
 {
-	pthread_t			big_bro;
+	pthread_t			killing;
 	t_philo				*philo;
 	t_data				*data;
-}						t_stalk;
+}						t_stalking;
 
 // sources //
 
@@ -66,15 +67,17 @@ void	death(t_philo *philo);
 void	join_thread(t_data *var);
 void	ft_usleep(int time);
 
+void	*big_bro(void *is_watching);
 void	*process(void *philo);
 
 int		print_status(t_philo *philo, char *str);
 int		init_mutex(t_data *var);
-int		init_philo(t_data *var);
+int		init_philo(t_data *var, t_philo *philo);
 int		check_ded(t_philo *philo);
 int		takefork(t_philo *philo);
 int		meal(t_philo *philo);
 
 long	gettime(void);
+long	convert(struct timeval var);
 
 #endif

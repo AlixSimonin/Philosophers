@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/21 17:50:31 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:15:19 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,36 @@ int	init_mutex(t_data *var)
 		pthread_mutex_destroy(&var->ded_mutex);
 		return (1);
 	}
+	if (pthread_mutex_init(&var->lock, NULL))
+	{
+		pthread_mutex_destroy(&var->ded_mutex);
+		pthread_mutex_destroy(&var->print_mutex);
+		return (1);
+	}
+	if (pthread_mutex_init(&var->wanna_die, NULL))
+	{
+		pthread_mutex_destroy(&var->ded_mutex);
+		pthread_mutex_destroy(&var->print_mutex);
+		pthread_mutex_destroy(&var->lock);
+		return (1);
+	}
 	return (0);
+}
+
+void	init_struct(t_data *var)
+{
+	int	i;
+
+	i = -1;
+	var->philo = malloc(var->nbr_philo * sizeof(t_philo));
+	if (!var->philo)
+		print_error(var, 5);
+	memset(var->philo, 0, sizeof(t_philo) * var->nbr_philo);
+	while (++i < var->nbr_philo)
+	{
+		var->philo[i].index = i + 1;
+		var->philo[i].data = var;
+	}
 }
 
 void	init(t_data *var, int ac, char **av)
@@ -46,29 +75,31 @@ void	init(t_data *var, int ac, char **av)
 	var->total_of_meal = 2147483647;
 	if (ac == 6)
 	{
-		var->total_of_meal = ft_atoi(av[5]) ; //* var->nbr_philo;
+		var->total_of_meal = ft_atoi(av[5]) * var->nbr_philo;
 		if (var->total_of_meal <= 0)
 			print_error(var, 1);
 	}
 	if (var->nbr_philo < 1 || var->nbr_philo > 200 || var->time_to_die < 0
 		|| var->time_to_eat < 0 || var->time_to_sleep < 0)
 		print_error(var, 1);
+	init_struct(var);
 }
 
-int	init_philo(t_data *var)
+int	init_philo(t_data *var, t_philo *philo)
 {
 	int	i;
+	t_stalking	sang_woo;
 
-	i = -1;
 	var->start_time = gettime();
-	var->philo = malloc(var->nbr_philo * sizeof(t_philo));
-	if (!var->philo)
-		return (1);
-	memset(var->philo, 0, sizeof(t_philo));
+	i = -1;
+	memset(&sang_woo, 0, sizeof(t_stalking));
+	sang_woo.data = var;
+	sang_woo.philo = philo;
+	// pthread_create(&sang_woo.killing, NULL, &big_bro, &sang_woo);
 	while (++i < var->nbr_philo)
 	{
-		var->philo[i].index = i + 1;
-		var->philo[i].data = var;
+		if (gettimeofday(&var->philo[i].kill_me, NULL) == -1)
+			return(1);
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
 		if (i == var->nbr_philo - 1)
 			var->philo[i].r_fork = &var->philo[0].l_fork;
