@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/22 20:10:11 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:21:52 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	init(t_data *var, int ac, char **av)
 		if (var->total_of_meal <= 0)
 			print_error(var, 1);
 	}
-	if (var->nbr_philo < 1 || var->nbr_philo > 200 || var->time_to_die < 0
-		|| var->time_to_eat < 0 || var->time_to_sleep < 0)
+	if (var->nbr_philo < 1 || var->nbr_philo > 200 || var->time_to_die <= 10
+		|| var->time_to_eat <= 10 || var->time_to_sleep <= 10)
 		print_error(var, 1);
 	init_struct(var);
 }

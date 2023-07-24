@@ -1,12 +1,12 @@
 NAME			=	philo
 
-LIBFT			=	libft/libft.a
+LIBFT			=	
 
 DIR_SRCS		=	srcs/mandatory
 
 DIR_OBJS		=	objs
 
-SRCS_NAMES		=	main.c	print.c	init.c	free_all.c	time.c	process.c	meal.c	death.c
+SRCS_NAMES		=	main.c	print.c	init.c	utils.c	process.c	meal.c	death.c
 
 SRCS_NAMES_B	=	
 
@@ -30,8 +30,7 @@ MAGENTA = \033[0;95m
 all				:	${NAME}
 
 $(NAME): $(OBJS)
-	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJS) ${LIBFT} ${HEAD} -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS)  ${HEAD} -o $(NAME)
 	@echo "\033[5;1m\033[38;5;117m		philo		\033[0m"
 
 
@@ -43,13 +42,10 @@ $(DIR_OBJS):
 
 
 clean:
-	@make clean -C libft
 	@rm -rf ${DIR_OBJS}
 	@echo "$(BLUE)philo object files cleaned!$(DEF_COLOR)"
 
 fclean:	clean
-	@make fclean -C libft
-	@rm -rf ${LIBFT}
 	@rm -rf ${NAME}
 	@echo "$(MAGENTA)philo executable files cleaned!$(DEF_COLOR)"
 

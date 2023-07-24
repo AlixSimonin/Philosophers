@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/22 15:39:10 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:21:41 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,5 @@ int	print_status(t_philo *philo, char *str)
 	pthread_mutex_unlock(&(philo)->data->print_mutex);
 	return (0);
 }
+
+

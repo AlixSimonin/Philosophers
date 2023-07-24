@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/22 20:17:48 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:24:09 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-# include "../libft/libft.h"
 
 typedef struct s_philo
 {
@@ -78,6 +77,7 @@ int		init_philo(t_data *var, t_philo *philo);
 int		check_ded(t_philo *philo);
 int		take_fork(t_philo *philo);
 int		meal(t_philo *philo);
+int		ft_atoi(const char *str);
 
 long	gettime(void);
 
