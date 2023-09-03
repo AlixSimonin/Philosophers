@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:12:27 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/24 15:23:48 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:26:15 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_all(t_data *var, int nbr)
 	if (var->philo)
 		free(var->philo);
 	if (nbr == 1)
-		exit (1);
+		return ;
 }
 
 int	ft_atoi(const char *str)

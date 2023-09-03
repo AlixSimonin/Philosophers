@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/24 16:21:52 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:36:40 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	join_thread(t_data *var, t_stalking *sang_woo)
 {
 	int	i;
 
+	if (pthread_join(sang_woo->killing, NULL) != 0)
+		print_error(var, 3);
 	i = -1;
 	while (++i < var->nbr_philo)
 		if (pthread_join(var->philo[i].thread, NULL) != 0)
 			print_error(var, 3);
-	if (pthread_join(sang_woo->killing, NULL) != 0)
-		print_error(var, 3);
 }
 
 int	init_mutex(t_data *var)
@@ -95,12 +95,12 @@ int	init_philo(t_data *var, t_philo *philo)
 	int			i;
 	t_stalking	sang_woo;
 
-	i = -1;
 	memset(&sang_woo, 0, sizeof(t_stalking));
 	sang_woo.data = var;
 	sang_woo.philo = philo;
 	if (pthread_create(&sang_woo.killing, NULL, &big_bro, &sang_woo))
-		print_error(var, 2);
+		return (print_error(var, 2), 0);
+	i = -1;
 	while (++i < var->nbr_philo)
 	{
 		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
@@ -110,7 +110,10 @@ int	init_philo(t_data *var, t_philo *philo)
 			var->philo[i].r_fork = &var->philo[i + 1].l_fork;
 		if (pthread_create(&var->philo[i].thread, NULL,
 				&process, (&var->philo[i])) != 0)
+		{
 			print_error(var, 2);
+			break ;
+		}
 	}
 	join_thread(var, &sang_woo);
 	return (0);

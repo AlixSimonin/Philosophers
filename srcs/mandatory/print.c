@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 01:48:35 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/24 15:21:41 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:37:00 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_error(t_data *var, int nbr)
 		printf("Mutex failed\n");
 	else if (nbr == 5)
 		printf("Malloc failed\n");
-	free_all(var, 1);
+	(void)var;
 }
 
 int	print_status(t_philo *philo, char *str)
@@ -44,5 +44,3 @@ int	print_status(t_philo *philo, char *str)
 	pthread_mutex_unlock(&(philo)->data->print_mutex);
 	return (0);
 }
-
-

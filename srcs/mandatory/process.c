@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:07:58 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/22 20:17:33 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:35:47 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	*process(void *philo)
 	t_philo		*tmp;
 
 	tmp = (t_philo *)philo;
-	if (tmp->index % 2 == 0)
+	if (tmp->index % 2)
 		ft_usleep(tmp->data->time_to_eat / 10);
 	while (1)
 	{
-		if (take_fork(tmp))
-			break ;
+		if (tmp->nbr_of_meal && tmp->index % 2)
+			ft_usleep(tmp->data->time_to_eat / 4);
 		if (meal(tmp))
 			break ;
 		if (print_status(tmp, "is thinking"))
