@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 20:49:26 by asimonin          #+#    #+#             */
-/*   Updated: 2023/07/24 16:58:39 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/15 19:29:46 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*big_bro(void *is_watching)
 			pthread_mutex_lock(&you->data->lock);
 			you->time = gettime() - you->philo->last_meal;
 			pthread_mutex_unlock(&you->data->lock);
-			if (you->time > you->data->time_to_die)
+			if (you->time >= you->data->time_to_die)
 			{
 				pthread_mutex_lock(&(you)->data->ded_mutex);
 				you->data->stap = 1;

@@ -6,11 +6,19 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:07:58 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/03 18:35:47 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:07:32 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	unlock(t_philo *philo)
+{
+	if (philo->left)
+		pthread_mutex_unlock(&(philo)->l_fork);
+	if (philo->right)
+		pthread_mutex_unlock(philo->r_fork);
+}
 
 int	check_ded(t_philo *philo)
 {
@@ -29,7 +37,7 @@ void	*process(void *philo)
 	t_philo		*tmp;
 
 	tmp = (t_philo *)philo;
-	if (tmp->index % 2)
+	if (tmp->index % 2 == 0)
 		ft_usleep(tmp->data->time_to_eat / 10);
 	while (1)
 	{
@@ -39,6 +47,9 @@ void	*process(void *philo)
 			break ;
 		if (print_status(tmp, "is thinking"))
 			break ;
+		if (tmp->data->nbr_philo % 2)
+			ft_usleep(tmp->data->time_to_eat * 2 - tmp->data->time_to_sleep);
 	}
+	unlock(tmp);
 	return (NULL);
 }

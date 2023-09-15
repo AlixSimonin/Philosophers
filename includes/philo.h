@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/03 18:37:18 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/15 19:42:40 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ typedef struct s_stalking
 
 // sources //
 
-void	print_error(t_data *var, int nbr);
+void	print_error(int nbr);
 void	free_all(t_data *var, int nbr);
-void	init(t_data *var, int ac, char **av);
 void	death(t_philo *philo);
 void	join_thread(t_data *var, t_stalking *sang_woo);
 void	ft_usleep(long int time);
@@ -70,6 +69,7 @@ void	ft_usleep(long int time);
 void	*big_bro(void *is_watching);
 void	*process(void *philo);
 
+int		init(t_data *var, int ac, char **av);
 int		print_status(t_philo *philo, char *str);
 int		init_mutex(t_data *var);
 int		init_philo(t_data *var, t_philo *philo);
