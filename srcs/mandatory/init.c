@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/15 19:43:04 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:38:49 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ void	init_struct(t_data *var)
 		var->philo[i].index = i + 1;
 		var->philo[i].data = var;
 		var->philo[i].last_meal = var->start_time;
+		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
+		if (i == var->nbr_philo - 1)
+			var->philo[i].r_fork = &var->philo[0].l_fork;
+		else
+			var->philo[i].r_fork = &var->philo[i + 1].l_fork;
 	}
 }
 
@@ -102,11 +107,6 @@ int	init_philo(t_data *var, t_philo *philo)
 	i = -1;
 	while (++i < var->nbr_philo)
 	{
-		pthread_mutex_init(&(var->philo[i].l_fork), NULL);
-		if (i == var->nbr_philo - 1)
-			var->philo[i].r_fork = &var->philo[0].l_fork;
-		else
-			var->philo[i].r_fork = &var->philo[i + 1].l_fork;
 		if (pthread_create(&var->philo[i].thread, NULL,
 				&process, (&var->philo[i])) != 0)
 		{
