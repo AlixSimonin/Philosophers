@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:34:55 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/15 18:10:59 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:16:32 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,8 @@ int	take_fork(t_philo *philo)
 	return (0);
 }
 
-int	drop_fork(t_philo *philo)
-{
-	philo->left = 0;
-	pthread_mutex_unlock(&(philo)->l_fork);
-	philo->right = 0;
-	pthread_mutex_unlock(philo->r_fork);
-	if (print_status(philo, "is sleeping"))
-		return (1);
-	ft_usleep(philo->data->time_to_sleep);
-	return (0);
-}
-
 int	meal(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo)->data->wanna_die);
-	philo->data->total_of_meal -= 1;
-	pthread_mutex_unlock(&(philo)->data->wanna_die);
 	if (take_fork(philo))
 		return (1);
 	pthread_mutex_lock(&philo->data->lock);
@@ -75,8 +60,16 @@ int	meal(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->lock);
 	if (print_status(philo, "is eating"))
 		return (1);
+	pthread_mutex_lock(&(philo)->data->wanna_die);
+	philo->data->total_of_meal -= 1;
+	pthread_mutex_unlock(&(philo)->data->wanna_die);
 	ft_usleep(philo->data->time_to_eat);
-	if (drop_fork(philo))
+	philo->left = 0;
+	pthread_mutex_unlock(&(philo)->l_fork);
+	philo->right = 0;
+	pthread_mutex_unlock(philo->r_fork);
+	if (print_status(philo, "is sleeping"))
 		return (1);
+	ft_usleep(philo->data->time_to_sleep);
 	return (0);
 }

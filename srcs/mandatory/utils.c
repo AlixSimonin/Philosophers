@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:12:27 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/03 18:26:15 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:59:03 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ long	gettime(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	free_all(t_data *var, int nbr)
+void	free_all(t_data *var)
 {
 	if (var->philo)
 		free(var->philo);
-	if (nbr == 1)
-		return ;
 }
 
 int	ft_atoi(const char *str)

@@ -6,18 +6,16 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 02:12:37 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/21 18:38:49 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:15:45 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	join_thread(t_data *var, t_stalking *sang_woo)
+void	join_thread(t_data *var)
 {
 	int	i;
 
-	if (pthread_join(sang_woo->killing, NULL) != 0)
-		print_error(3);
 	i = -1;
 	while (++i < var->nbr_philo)
 		if (pthread_join(var->philo[i].thread, NULL) != 0)
@@ -94,16 +92,10 @@ int	init(t_data *var, int ac, char **av)
 	return (0);
 }
 
-int	init_philo(t_data *var, t_philo *philo)
+int	init_philo(t_data *var)
 {
-	int			i;
-	t_stalking	sang_woo;
+	int	i;
 
-	memset(&sang_woo, 0, sizeof(t_stalking));
-	sang_woo.data = var;
-	sang_woo.philo = philo;
-	if (pthread_create(&sang_woo.killing, NULL, &big_bro, &sang_woo))
-		return (print_error(2), 0);
 	i = -1;
 	while (++i < var->nbr_philo)
 	{
@@ -114,6 +106,7 @@ int	init_philo(t_data *var, t_philo *philo)
 			break ;
 		}
 	}
-	join_thread(var, &sang_woo);
+	big_bro(var);
+	join_thread(var);
 	return (0);
 }

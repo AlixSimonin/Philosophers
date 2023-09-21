@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/15 19:42:40 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:59:16 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,21 @@ typedef struct s_data
 	t_philo			*philo;
 }	t_data;
 
-typedef struct s_stalking
-{
-	pthread_t			killing;
-	t_philo				*philo;
-	t_data				*data;
-	long				time;
-}						t_stalking;
-
 // sources //
 
 void	print_error(int nbr);
-void	free_all(t_data *var, int nbr);
+void	free_all(t_data *var);
 void	death(t_philo *philo);
-void	join_thread(t_data *var, t_stalking *sang_woo);
+void	join_thread(t_data *var);
 void	ft_usleep(long int time);
 
-void	*big_bro(void *is_watching);
+void	*big_bro(t_data *var);
 void	*process(void *philo);
 
 int		init(t_data *var, int ac, char **av);
 int		print_status(t_philo *philo, char *str);
 int		init_mutex(t_data *var);
-int		init_philo(t_data *var, t_philo *philo);
+int		init_philo(t_data *var);
 int		check_ded(t_philo *philo);
 int		take_fork(t_philo *philo);
 int		meal(t_philo *philo);
