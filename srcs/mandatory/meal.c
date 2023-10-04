@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:34:55 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/21 19:16:32 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:36:19 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ int	take_fork(t_philo *philo)
 
 int	meal(t_philo *philo)
 {
+	if (philo->nbr_of_meal == philo->data->meal)
+	{
+		ft_usleep(philo->data->time_to_eat * 0.5);
+		return (0);
+	}
 	if (take_fork(philo))
 		return (1);
 	pthread_mutex_lock(&philo->data->lock);
@@ -62,6 +67,7 @@ int	meal(t_philo *philo)
 		return (1);
 	pthread_mutex_lock(&(philo)->data->wanna_die);
 	philo->data->total_of_meal -= 1;
+	philo->nbr_of_meal += 1;
 	pthread_mutex_unlock(&(philo)->data->wanna_die);
 	ft_usleep(philo->data->time_to_eat);
 	philo->left = 0;

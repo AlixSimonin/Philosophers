@@ -6,7 +6,7 @@
 /*   By: asimonin <asimonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:30:24 by asimonin          #+#    #+#             */
-/*   Updated: 2023/09/21 18:59:16 by asimonin         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:35:51 by asimonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				total_of_meal;
+	int				meal;
 	int				stap;
 	long			start_time;
 	t_philo			*philo;
